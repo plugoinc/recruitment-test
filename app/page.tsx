@@ -6,16 +6,16 @@ import { useState } from "react";
 type User = { id: number; name: string; email: string };
 
 export default function Page() {
-  const [users] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [q, setQ] = useState("");
-  const [loading] = useState(false);
-  const [err] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
 
-  const [creating] = useState(false);
+  const [creating, setCreating] = useState(false);
   const [createName, setCreateName] = useState("");
   const [createEmail, setCreateEmail] = useState("");
 
-  const [upserting] = useState(false);
+  const [upserting, setUpserting] = useState(false);
   const [upsertId, setUpsertId] = useState<number>(4);
   const [upsertName, setUpsertName] = useState("");
   const [upsertEmail, setUpsertEmail] = useState("");
@@ -40,9 +40,6 @@ export default function Page() {
         }}
       >
         <details open>
-          <summary style={{ fontWeight: 600 }}>
-            必須課題（候補者に見せる想定 / TODO印つき）
-          </summary>
           <ol>
             <li>
               <b>一覧表示</b>：ユーザー（id, name, email）をテーブル表示（
@@ -56,10 +53,11 @@ export default function Page() {
               <code>POST /api/users</code>）。二重送信防止。
             </li>
             <li>
-              （任意）<b>UI改善</b>
+              <b>UI改善</b>
               ：ローディング表示、アクセシビリティ、フォームバリデーション。
-              </li><li>
-              （任意）<b>UPSERT</b>：id を指定して「無ければ作成・あれば更新」（
+            </li>
+            <li>
+              <b>UPSERT</b>：id を指定して「無ければ作成・あれば更新」（
               <code>PUT /api/users?id=</code>）。
             </li>
           </ol>
@@ -84,9 +82,7 @@ export default function Page() {
           <thead>
             <tr>
               <th style={th}>ID</th>
-              <th style={th}>
-                名前
-              </th>
+              <th style={th}>名前</th>
               <th style={th}>Email</th>
             </tr>
           </thead>
@@ -132,9 +128,7 @@ export default function Page() {
               style={inp}
             />
           </div>
-          <button
-            disabled={creating || !createName || !createEmail}
-          >
+          <button disabled={creating || !createName || !createEmail}>
             {creating ? "Creating..." : "Create"}
           </button>
         </div>
@@ -166,9 +160,7 @@ export default function Page() {
               style={inp}
             />
           </div>
-          <button
-            disabled={upserting || !upsertName || !upsertEmail}
-          >
+          <button disabled={upserting || !upsertName || !upsertEmail}>
             {upserting ? "Upserting..." : "Upsert"}
           </button>
         </div>
@@ -194,4 +186,3 @@ const row: React.CSSProperties = {
 };
 const lab: React.CSSProperties = { color: "#444" };
 const inp: React.CSSProperties = { padding: 8, width: "100%" };
-
