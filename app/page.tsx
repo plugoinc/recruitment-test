@@ -46,19 +46,7 @@ export default function Page() {
               <code>GET /api/users</code>）。
             </li>
             <li>
-              <b>検索</b>：検索入力で絞り込み（デバウンス済み）。
-            </li>
-            <li>
-              <b>作成</b>：name/email を入力して作成（
-              <code>POST /api/users</code>）。二重送信防止。
-            </li>
-            <li>
-              <b>UI改善</b>
-              ：ローディング表示、アクセシビリティ、フォームバリデーション。
-            </li>
-            <li>
-              <b>UPSERT</b>：id を指定して「無ければ作成・あれば更新」（
-              <code>PUT /api/users?id=</code>）。
+              <b>検索</b>：検索入力で絞り込み
             </li>
           </ol>
         </details>
@@ -103,67 +91,6 @@ export default function Page() {
             )}
           </tbody>
         </table>
-      </section>
-
-      <hr style={{ margin: "24px 0" }} />
-
-      <section
-        style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}
-      >
-        <div style={{ border: "1px solid #ddd", borderRadius: 8, padding: 12 }}>
-          <h3>作成（POST /api/users）</h3>
-          <div style={row}>
-            <label style={lab}>Name</label>
-            <input
-              value={createName}
-              onChange={(e) => setCreateName(e.target.value)}
-              style={inp}
-            />
-          </div>
-          <div style={row}>
-            <label style={lab}>Email</label>
-            <input
-              value={createEmail}
-              onChange={(e) => setCreateEmail(e.target.value)}
-              style={inp}
-            />
-          </div>
-          <button disabled={creating || !createName || !createEmail}>
-            {creating ? "Creating..." : "Create"}
-          </button>
-        </div>
-
-        <div style={{ border: "1px solid #ddd", borderRadius: 8, padding: 12 }}>
-          <h3>UPSERT（PUT /api/users?id=ID）</h3>
-          <div style={row}>
-            <label style={lab}>ID</label>
-            <input
-              type="number"
-              value={upsertId}
-              onChange={(e) => setUpsertId(Number(e.target.value))}
-              style={inp}
-            />
-          </div>
-          <div style={row}>
-            <label style={lab}>Name</label>
-            <input
-              value={upsertName}
-              onChange={(e) => setUpsertName(e.target.value)}
-              style={inp}
-            />
-          </div>
-          <div style={row}>
-            <label style={lab}>Email</label>
-            <input
-              value={upsertEmail}
-              onChange={(e) => setUpsertEmail(e.target.value)}
-              style={inp}
-            />
-          </div>
-          <button disabled={upserting || !upsertName || !upsertEmail}>
-            {upserting ? "Upserting..." : "Upsert"}
-          </button>
-        </div>
       </section>
     </main>
   );
